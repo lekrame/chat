@@ -1,4 +1,5 @@
 #!/usr/bin/ruby -w
+
 require 'net/smtp'
 
 #msgstr = <<END_OF_MESSAGE
