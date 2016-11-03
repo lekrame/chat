@@ -1,31 +1,29 @@
 #!/usr/bin/ruby -w
+require 'mail'
 
-require 'net/smtp'
-require "time"
-puts "Enter gmail address:"
-email = gets.chomp
-puts "Enter pw:"
-pw = gets.chomp
-
-
-#msgstr = <<END_OF_MESSAGE
-msgstr = 'From: Michael Kramer <#{email}@gmail.com>
-To: Michael Kramer <#{email}@gmail.com>
-Subject: from Ruby
-Date: ' + Time.now.inspect.to_s + '
-Message-Id: 001000
+fromAddress = 'pianospree@gmail.com'
+toAddress = 'mk@pianospree.com'
+now = Time.new.gmtime.strftime("%Y-%m-%d %H:%M:%S Greenwich Mean Time")
+#now = Time.new.gmtime.to_s
+message_body = <<END_OF_EMAIL
+From: Michael Kramer <pianospree@gmail.com>
+To: Other kramer <mk@pianospree.com>
+Subject: trial text message
 
 This is a test message.
-'
+Sent at #{now}
+END_OF_EMAIL
 
-STDOUT.puts "email = >>>#{email}<<<<<"
 
-Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
-Net::SMTP.start('smtp.gmail.com', 587, 'localhost', "${email}.gmail.com", "#{pw}", :plain) do |smpt|
-#Net::SMTP.start('smtp.gmail.com', 25, 'localhost', email, pw, :plain) do |smpt|
-  smtp.send_message (msgstr)
-  #smtp.sendmail (msgstr, email, email)
-end
-#puts msgstr
-=begin
-=end
+server = 'smtp.gmail.com'
+#mail_from_domain = 'gmail.com'
+port = 587      # or 25 - double check with your provider
+username = 'pianospree@gmail.com'
+password = 'asdfjkl;5%'
+
+smtp = Net::SMTP.new(server, port)
+smtp.enable_starttls_auto
+smtp.start(server,username,password, :plain)
+smtp.send_message(message_body, fromAddress, toAddress)
+puts "Message sent"
+exit
