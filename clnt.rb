@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 require 'socket'
-
 a = TCPSocket.new('127.0.0.1', 1024) # could replace 127.0.0.1 with your "real" IP if desired.
 a.write("hello")
 loop {
@@ -15,4 +14,4 @@ loop {
 	gets
 	a.write($_)
 }
-puts "End of dialogue"
+puts "\nEnd of dialogue"
