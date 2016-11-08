@@ -1,0 +1,6 @@
+#!/bin/bash
+apt-get update
+apt-get -y upgrade
+apt-get -y install ruby
+gem install mail
+gem install twilio-ruby
