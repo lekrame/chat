@@ -5,7 +5,9 @@ require 'socket'
 require 'outreach'
 a = TCPServer.new('', 1024) # '' means to bind to "all interfaces", same as nil or '0.0.0.0'
 connection = a.accept
-logfile = File.open('/home/mk/servers/chat/logs/chat.log', File::WRONLY | File::APPEND | File::CREAT)
+homedir = `cd;pwd`.chomp
+system("mkdir -p #{homedir}/chat/logs")
+logfile = File.open("#{homedir}/chat/logs/chat.log", File::WRONLY | File::APPEND | File::CREAT)
 log = Logger.new(logfile)
 loop {
 	@instring = connection.recv(3333).chomp
