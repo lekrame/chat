@@ -10,7 +10,7 @@ system("mkdir -p #{homedir}/chat/logs")
 logfile = File.open("#{homedir}/chat/logs/chat.log", File::WRONLY | File::APPEND | File::CREAT)
 log = Logger.new(logfile)
 loop {
-	@instring = connection.recv(3333).chomp
+	@instring = connection.recv(255).chomp
 	log.info(@instring)
 	case @instring
 		when 'exit'
