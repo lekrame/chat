@@ -1,0 +1,17 @@
+#!/usr/bin/ruby
+
+require 'encrypted_strings'
+@file = ARGV[0]
+@pw = ARGV[1]
+@pw.chomp!
+if (@pw.length < 1) then
+	printf "Enter password: "
+	@pw = gets.chomp
+end
+puts "file = #{@file}\npw = #{@pw}\n"
+exit
+data = "marvelous"
+encrypted = data.encrypt(:symmetric, :algorithm => 'des-ecb', :password => pw)
+p encrypted
+restored = encrypted.decrypt(:symmetric, :algorithm => 'des-ecb', :password => pw)
+p restored
