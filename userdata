@@ -4,3 +4,5 @@ apt-get -y upgrade
 apt-get -y install ruby
 gem install mail
 gem install twilio-ruby
+gem install json
+gem install encrypted_strings
