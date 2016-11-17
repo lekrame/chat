@@ -2,6 +2,7 @@
 apt-get update
 apt-get -y upgrade
 apt-get -y install ruby
+apt-get -y install awscli
 gem install mail
 gem install twilio-ruby
 gem install json
