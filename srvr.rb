@@ -5,6 +5,7 @@ require 'socket'
 require 'outreach'
 a = TCPServer.new('', 1024) # '' means to bind to "all interfaces", same as nil or '0.0.0.0'
 connection = a.accept
+connection.write "Welcome.  Commands are:\n\temail <rcpt> <pw>\n\tsms <to> <from> <msg>\n\tlog <msg>\n\texit\n"
 homedir = `cd;pwd`.chomp
 system("mkdir -p #{homedir}/chat/logs")
 logfile = File.open("#{homedir}/chat/logs/chat.log", File::WRONLY | File::APPEND | File::CREAT)
