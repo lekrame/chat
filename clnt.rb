@@ -1,7 +1,7 @@
 #!/usr/bin/ruby
 require 'socket'
 a = TCPSocket.new('127.0.0.1', 1024) # could replace 127.0.0.1 with your "real" IP if desired.
-a.write("hello")
+#a.write("hello")
 loop {
 	@api = a.recv(128)
 	if @api =~ /^exit$/
@@ -12,6 +12,7 @@ loop {
 	end
 	puts "response: " + @api + "\nNext command?: "
 	gets
+	puts "sending #{$_}"
 	a.write($_)
 }
 puts "\nEnd of dialogue"
