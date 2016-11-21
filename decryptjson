@@ -1,17 +1,19 @@
 #!/usr/bin/ruby
 
 require 'encrypted_strings'
-@file = ARGV[0].dup
-if (@file.nil?) then
+if (ARGV[0].nil?) then
 	printf "Enter encrypted json file to decrypt: "
 	@file = STDIN.gets
+else
+	@file = ARGV[0].dup
 end
 @file.chomp!
 @decfile = @file + '.dec'
-@pw = ARGV[1].dup
-if (@pw.nil?) then
+if (ARGV[1].nil?) then
 	printf "Enter password: "
 	@pw = STDIN.gets
+else
+	@pw = ARGV[1].dup
 end
 @pw.chomp!
 f = File.open(@file)
