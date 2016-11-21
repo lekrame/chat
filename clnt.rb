@@ -1,7 +1,18 @@
 #!/usr/bin/ruby
 require 'socket'
-a = TCPSocket.new('127.0.0.1', 1024) # could replace 127.0.0.1 with your "real" IP if desired.
-#a.write("hello")
+if (ARGV[0].nil?) then
+	printf "Enter IP address of server: "
+	@serverip = STDIN.gets
+else
+	@serverip = ARGV[0].dup
+end
+@serverip.chomp!
+a = TCPSocket.new(@serverip, 1024) # 127.0.0.1 is localhost
+#a = TCPSocket.new("#{@serverip}", 1024) # 127.0.0.1 is localhost
+@api = a.recv(128).chomp
+puts @api
+STDIN.gets
+a.write($_);
 loop {
 	@api = a.recv(128)
 	if @api =~ /^exit$/
@@ -11,7 +22,7 @@ loop {
 		break
 	end
 	puts "response: " + @api + "\nNext command?: "
-	gets
+	STDIN.gets
 	puts "sending #{$_}"
 	a.write($_)
 }

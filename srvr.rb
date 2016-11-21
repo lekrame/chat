@@ -13,7 +13,7 @@ connection.write "Welcome.  Commands are:\n\temail <rcpt>\n\tsms <to> <msg>\n\tl
 @secretspw = connection.recv(255).chomp
 Outreach::Secrets.load("secrets.enc", @secretspw)
 connection.write "Enter command: "
-logfile = File.open("#{homedir}/chat/logs/chat.log", File::WRONLY | File::APPEND | File::CREAT)
+logfile = File.open("#{homedir}/servers/chat/logs/chat.log", File::WRONLY | File::APPEND | File::CREAT)
 log = Logger.new(logfile)
 loop {
 	@instring = connection.recv(255).chomp

@@ -4,7 +4,7 @@ module Outreach
 	require 'encrypted_strings'
 	class Secrets
 		def Secrets.load(encjsonfile, pw)
-			$pw = pw
+			$pw = pw.chomp
 			jsonvals = File.read(encjsonfile)
 			valhash = JSON.parse(jsonvals)
 			$twilioaccountsid = valhash["twilioaccountsid"].decrypt(:symmetric, :algorithm => 'des-ecb', :password => $pw).chomp
